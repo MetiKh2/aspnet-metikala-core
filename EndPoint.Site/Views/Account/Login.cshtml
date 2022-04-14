@@ -1,0 +1,102 @@
+﻿@model MetiKala.Application.DTOs.User.LoginViewModel
+@{
+    ViewData["Title"] = "ورود";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    #dangerText {
+        display: none;
+    }
+</style>
+<!-- login -->
+<div class="w3_login">
+
+    <div class="w3_login_module">
+        <div class="module form-module">
+
+
+
+            <h2>رورد به سایت</h2>
+            @if (ViewBag.Seccess == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    ثبت نام موفقیت آمیز بود (به صفحه اصلی هدایت می شوید)
+                </div>
+                <script>
+                    setTimeout(function () {
+                        window.location.href = "/";
+                    }, 2500);
+                </script>
+
+            }
+            @if (ViewBag.SendEmail == true)
+            {
+                <div class="alert alert-success" role="alert">
+                   ایمیل ارسال شد
+                </div>
+            }
+            @if (ViewBag.resetPassword == true)
+            {
+                <div class="alert alert-warning" role="alert">
+                    به دلیل مسائل امنیتی دوباره لاگین کنید
+                </div>
+            }
+            <form id="formRegister" asp-action="Login" method="post">
+                <input id="userNameOrEmail" asp-for="UserNameOrEmail" type="text" placeholder="ایمیل یا نام کاربری">
+
+                <input id="password" asp-for="Password" type="password" placeholder="رمز عبور">
+                @if (ViewBag.UserNull == true)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        حسابی با این مشخصات یافت نشد
+                    </div>
+                }
+                <div id="dangerText" class="alert alert-danger" role="alert">
+                    لطفا تمامی موارد را وارد کنید
+                </div>
+                <input type="checkbox" style="color:dodgerblue" asp-for="RememberMe" />مرا به خاطر بسپار
+                <input type="submit" value=" ورود">
+            </form>
+
+            <div class="cta"><a href="/ForgotPassword">رمز عبور خود را فراموش کرده اید؟</a></div>
+        </div>
+    </div>
+    @*<script>
+            $('.toggle').click(function () {
+                // Switches the Icon
+                $(this).children('i').toggleClass('fa-pencil');
+                // Switches the forms
+                $('.form').animate({
+                    height: "toggle",
+                    'padding-top': 'toggle',
+                    'padding-bottom': 'toggle',
+                    opacity: "toggle"
+                }, "slow");
+            });
+        </script>*@
+
+    <script>
+
+
+        //چک کردن داده ها برای ثبت نام کاربران
+        const element = document.querySelector('#formRegister');
+        element.addEventListener('submit', event => {
+            let userNameOrEmail = document.getElementById('userNameOrEmail').value;
+         
+            let password = document.getElementById('password').value;
+
+            if (userNameOrEmail == "" || password == "") {
+                var dangerText = document.getElementById('dangerText');
+                dangerText.style.display = "block";
+                event.preventDefault();
+            }
+
+            // actual logic, e.g. validate the form
+            console.log('Form submission cancelled.');
+        });
+
+    </script>
+</div>
+<!-- //login -->

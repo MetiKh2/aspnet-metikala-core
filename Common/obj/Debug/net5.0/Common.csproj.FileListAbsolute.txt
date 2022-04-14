@@ -1,0 +1,12 @@
+D:\فروشگاهی متی کالا\MetiKala\Common\bin\Debug\net5.0\Common.deps.json
+D:\فروشگاهی متی کالا\MetiKala\Common\bin\Debug\net5.0\Common.dll
+D:\فروشگاهی متی کالا\MetiKala\Common\bin\Debug\net5.0\ref\Common.dll
+D:\فروشگاهی متی کالا\MetiKala\Common\bin\Debug\net5.0\Common.pdb
+D:\فروشگاهی متی کالا\MetiKala\Common\obj\Debug\net5.0\Common.csprojAssemblyReference.cache
+D:\فروشگاهی متی کالا\MetiKala\Common\obj\Debug\net5.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\فروشگاهی متی کالا\MetiKala\Common\obj\Debug\net5.0\Common.AssemblyInfoInputs.cache
+D:\فروشگاهی متی کالا\MetiKala\Common\obj\Debug\net5.0\Common.AssemblyInfo.cs
+D:\فروشگاهی متی کالا\MetiKala\Common\obj\Debug\net5.0\Common.csproj.CoreCompileInputs.cache
+D:\فروشگاهی متی کالا\MetiKala\Common\obj\Debug\net5.0\Common.dll
+D:\فروشگاهی متی کالا\MetiKala\Common\obj\Debug\net5.0\ref\Common.dll
+D:\فروشگاهی متی کالا\MetiKala\Common\obj\Debug\net5.0\Common.pdb

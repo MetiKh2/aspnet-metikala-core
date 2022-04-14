@@ -1,0 +1,80 @@
+﻿@model MetiKala.Domain.Entities.User.Role
+
+@{
+    ViewData["Title"] = "افزودن نقش";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<MetiKala.Domain.Entities.Permission.Permission> Permissions = ViewBag.Permissions;
+}
+
+<h1>Create</h1>
+
+<h4>Role</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div style="margin-left:1000px">
+                <label asp-for="RoleTitle"></label>
+                <input asp-for="RoleTitle" />
+                <span asp-validation-for="RoleTitle" class="row text-danger"></span>
+                @if (ViewBag.TitleExists == true)
+                {
+                    <p class=" text-danger row">نام نقش تکراری می باشد</p>
+                }
+            </div>
+
+
+            <div class="row">
+                <ul>
+                    @foreach (var item in Permissions.Where(p => p.ParentID == null))
+                    {
+                        <li>
+                            <input name="selectedPermissions" type="checkbox" value="@item.PermissionID" />  @item.PermissionTitle
+
+                            @foreach (var sub in Permissions.Where(p => p.ParentID == item.PermissionID))
+                            {
+
+                                <ul>
+                                    <li>
+                                        <input name="selectedPermissions"  style="margin-right:10px" type="checkbox" value="@sub.PermissionID" />  @sub.PermissionTitle
+
+
+                                        @foreach (var sub2 in Permissions.Where(p => p.ParentID == sub.PermissionID))
+                                        {
+                                            <ul>
+                                                <li>
+                                                    <input name="selectedPermissions"  style="margin-right:20px" type="checkbox" value="@sub2.PermissionID" />  @sub2.PermissionTitle
+                                                </li>
+                                            </ul>
+                                        }
+
+
+
+                                    </li>
+                                </ul>
+
+                            }
+
+
+                        </li>
+                    }
+                </ul>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

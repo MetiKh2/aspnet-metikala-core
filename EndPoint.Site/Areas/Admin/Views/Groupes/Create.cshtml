@@ -1,0 +1,57 @@
+﻿@model MetiKala.Domain.Entities.Products.ProductsGroupe
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    #dangerText {
+        display: none;
+        margin-right:25px
+    }
+</style>
+<div class="widget-inner">
+    <form id="form" asp-action="Create" class="edit-profile m-b30">
+        <div class="row">
+            <div class="col-12">
+                <input type="hidden" asp-for="ParentID" />
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">نام گروه</label>
+                <div>
+                    <input id="title" asp-for="GroupeTitle" type="text">
+                </div>
+                <div id="dangerText" class="row alert alert-danger" role="alert">
+                    لطفا تمامی موارد را وارد کنید
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-12">
+
+            <button type="submit" class="btn">ذخیره تغییرات</button>
+        </div>
+    </form>
+</div>
+<script>
+
+
+    //چک کردن داده ها برای ثبت نام کاربران
+    const element = document.querySelector('#form');
+    element.addEventListener('submit', event => {
+
+        let title = document.getElementById('title').value;
+
+        if (title == "") {
+            var dangerText = document.getElementById('dangerText');
+            dangerText.style.display = "block";
+            event.preventDefault();
+        }
+
+        // actual logic, e.g. validate the form
+        console.log('Form submission cancelled.');
+    });
+
+</script>
+

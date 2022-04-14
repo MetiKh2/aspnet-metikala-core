@@ -1,0 +1,36 @@
+﻿@model MetiKala.Domain.Entities.Order.Order 
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="alert alert-success" style="margin-top:100px">
+
+    <h3>جزییات سفارش @Model.OrderID</h3>
+    <div class="bs-docs-example">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  
+                    <th>کالا</th>
+                    <th>قیمت</th>
+                    <th>تعداد</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderDetails.Where(p => p.Count > 0))
+                {
+                    <tr>
+                        <td>@item.Product.ProductTitle</td>
+                        <td>@item.Product.Price</td>
+                        <td>@item.Count</td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

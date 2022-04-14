@@ -1,0 +1,156 @@
+﻿@model MetiKala.Domain.Entities.Order.Order
+@{ 
+    int orderId = Model.OrderID;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shopping Cart</title>
+
+    <link rel="stylesheet" href="~/CartTemplate/style.css" media="screen" title="no title" charset="utf-8">
+    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+    <meta name="robots" content="noindex,follow" />
+</head>
+<body style="background-color:white;border-block-color:white;">
+    <div class="shopping-cart">
+        <!-- Title -->
+        <div class="title">
+            سبد خرید
+        </div>
+
+        <!-- Product  -->
+        @if (Model != null)
+        {
+
+
+            @if (Model.OrderDetails.Any() == true)
+            {
+
+
+                @foreach (var item in Model.OrderDetails.Where(p => p.Count > 0))
+                {
+                    <div class="item row">
+                        <div class="buttons">
+                            <span class="delete-btn"></span>
+                            <span class="like-btn"></span>
+                        </div>
+
+                        <div class="image">
+                            <img width="100" height="100" src="/products/ThumbImages/@item.Product.Image" alt="" />
+                        </div>
+
+                        <div class="description">
+                            <span>@item.Product.ProductTitle</span>
+
+                        </div>
+
+                        <div class="quantity">
+                            <a href="/Order/AddOrder/@item.ProductID">
+
+                                <img src="~/CartTemplate/plus.svg" alt="" />
+
+                            </a>
+                            <input type="text" name="name" value="@item.Count">
+                            <a href="/Order/MinusFromOrder/@item.ProductID">
+                                <img src="~/CartTemplate/minus.svg" alt="" />
+                            </a>
+                        </div>
+
+                        <div style="margin-right:7px" class="total-price">@item.Product.Price.ToString("n0") تومان</div>
+                    </div>
+
+
+
+                }
+                <div class="alert alert-info" role="alert">
+                    جمع کل :   <strong>@Model.SumAmount</strong> تومان
+                </div>
+                <form asp-action="UseDiscountCode">
+                    <input type="hidden" name="orderId" value="@Model.OrderID" />
+                    <input type="text" name="code" placeholder="کد تخفیف" />
+                    <input type="submit"/>
+                </form>
+
+                <a href="/RequestPayment/@Model.OrderID" class="btn btn-primary">تسویه حساب</a>
+
+            }
+        }
+    </div>
+    @if (Model != null)
+    {
+
+
+        @if (Model.OrderDetails.Any() == true)
+        {
+
+
+            @foreach (var item in Model.OrderDetails.Where(p => p.Count > 0))
+            {
+                <br />
+                <br />
+                <br />
+
+            }
+        }
+    }
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type='text/javascript'>
+
+
+
+
+
+        $("#Discount").click(function () {
+            //this will find the selected website from the dropdown
+            
+            
+                var discountCode = document.getElementById('code').value;
+                window.location.replace("/UseDiscountCode/2?code=" + discountCode);
+
+            });
+
+        //this will be triggered when the second button was clicked
+
+    </script>*@
+
+    <script type="text/javascript">
+                $('.minus-btn').on('click', function (e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    var $input = $this.closest('div').find('input');
+                    var value = parseInt($input.val());
+
+                    if (value > 1) {
+                    value = value - 1;
+                    } else {
+                    value = 0;
+                    }
+
+                    $input.val(value);
+
+                });
+
+                $('.plus-btn').on('click', function (e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    var $input = $this.closest('div').find('input');
+                    var value = parseInt($input.val());
+
+                    if (value < 100) {
+                    value = value + 1;
+                    } else {
+                    value = 100;
+                    }
+
+                    $input.val(value);
+                });
+
+                $('.like-btn').on('click', function () {
+                    $(this).toggleClass('is-active');
+                });
+    </script>
+</body>
+</html>

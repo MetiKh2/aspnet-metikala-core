@@ -1,0 +1,42 @@
+﻿@model List<MetiKala.Domain.Entities.Products.ProductsGroupe>
+@{
+    Layout = null;
+}
+
+<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav nav_1">
+        @foreach (var item in Model.Where(p => p.ParentID == null))
+        {
+        <li class="dropdown mega-dropdown active">
+            <a href="/products?groupeId=@item.GroupeID" class="dropdown-toggle" data-toggle="dropdown">
+                @item.GroupeTitle<span class="caret"></span>
+            </a>
+            @if (Model.Any(p => p.ParentID == item.GroupeID))
+            {
+               
+                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                        <div class="w3ls_vegetables">
+                            <ul>
+                                @foreach (var sub in Model.Where(p => p.ParentID == item.GroupeID))
+                                {
+                                    <li>
+
+                                        <a href="/products?groupeId=@sub.GroupeID">
+                                            @sub.GroupeTitle
+                                        </a>
+
+
+                                    </li>
+                                }
+                                </ul>
+                        </div>
+                    </div>
+
+            }
+
+        </li>
+        }
+
+
+    </ul>
+</div>

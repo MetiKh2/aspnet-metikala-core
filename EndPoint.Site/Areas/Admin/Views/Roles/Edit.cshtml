@@ -1,0 +1,79 @@
+﻿@model MetiKala.Application.DTOs.Role.EditRoleViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<MetiKala.Domain.Entities.Permission.Permission> Permissions = ViewBag.Permissions;
+    List<int> RolePermissions = ViewBag.RolePermissions;
+}
+
+<h1>Edit</h1>
+
+<h4>Role</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="RoleID" />
+            <input type="hidden" asp-for="LastRoleTitle" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RoleID" />
+            <div style="margin-left:1000px">
+                <label asp-for="NewRoleTitle" class="control-label"></label>
+                <input asp-for="NewRoleTitle" value="@Model.LastRoleTitle" />
+                <span asp-validation-for="NewRoleTitle" class="text-danger"></span>
+                @if (ViewBag.TitleExists == true)
+                {
+                    <p class=" text-danger">نام نقش تکراری می باشد</p>
+                }
+            </div>
+            <div class="row">
+                <ul>
+                    @foreach (var item in Permissions.Where(p => p.ParentID == null))
+                    {
+                        <li>
+                            <input name="selectedPermissions" type="checkbox" value="@item.PermissionID" @((RolePermissions.Any(p=>p==item.PermissionID)?"checked":"")) />  @item.PermissionTitle
+
+                            @foreach (var sub in Permissions.Where(p => p.ParentID == item.PermissionID))
+                            {
+
+                                <ul>
+                                    <li>
+                                        <input name="selectedPermissions" style="margin-right:10px" type="checkbox" value="@sub.PermissionID" @((RolePermissions.Any(p=>p==sub.PermissionID)?"checked":""))  />  @sub.PermissionTitle
+
+
+                                        @foreach (var sub2 in Permissions.Where(p => p.ParentID == sub.PermissionID))
+                                        {
+                                            <ul>
+                                                <li>
+                                                    <input name="selectedPermissions" style="margin-right:20px" type="checkbox" value="@sub2.PermissionID" @((RolePermissions.Any(p=>p==sub2.PermissionID)?"checked":""))  />  @sub2.PermissionTitle
+                                                </li>
+                                            </ul>
+                                        }
+
+
+
+                                    </li>
+                                </ul>
+
+                            }
+
+
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

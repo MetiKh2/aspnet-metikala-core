@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MetiKala.Domain.Entities.Products.ProductsGroupe>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupeTitle)
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupeTitle)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GroupeID">Edit</a> |
+                <a asp-action="Create" asp-route-id="@item.GroupeID">Create Child</a> |
+                <a asp-action="Index" asp-route-id="@item.GroupeID">Childs</a> |
+                <a asp-action="Details" asp-route-id="@item.GroupeID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GroupeID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

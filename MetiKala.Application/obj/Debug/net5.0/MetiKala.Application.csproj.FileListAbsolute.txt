@@ -1,0 +1,17 @@
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\bin\Debug\net5.0\MetiKala.Application.deps.json
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\bin\Debug\net5.0\MetiKala.Application.dll
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\bin\Debug\net5.0\ref\MetiKala.Application.dll
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\bin\Debug\net5.0\MetiKala.Application.pdb
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\bin\Debug\net5.0\Common.dll
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\bin\Debug\net5.0\MetiKala.Domain.dll
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\bin\Debug\net5.0\Common.pdb
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\bin\Debug\net5.0\MetiKala.Domain.pdb
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\MetiKala.Application.csprojAssemblyReference.cache
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\MetiKala.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\MetiKala.Application.AssemblyInfoInputs.cache
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\MetiKala.Application.AssemblyInfo.cs
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\MetiKala.Application.csproj.CoreCompileInputs.cache
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\MetiKala.Application.csproj.CopyComplete
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\MetiKala.Application.dll
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\ref\MetiKala.Application.dll
+D:\فروشگاهی متی کالا\MetiKala\MetiKala.Application\obj\Debug\net5.0\MetiKala.Application.pdb

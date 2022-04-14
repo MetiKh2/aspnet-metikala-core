@@ -1,0 +1,143 @@
+﻿@model int 
+@{
+    ViewData["Title"] = "AddFeatures";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    
+<div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+    <fieldset class="form-group">
+        <label for="basicInput"> نام ویژگی </label>
+        <input type="text"  id="txtDisplayName" placeholder="نام ویژگی" />
+    </fieldset>
+</div>
+
+<div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+    <fieldset class="form-group">
+        <label for="basicInput"> مقدار ویژگی </label>
+        <input type="text"  id="txtValue" placeholder="مقدار ویژگی" />
+    </fieldset>
+</div>
+<div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+    <fieldset class="form-group">
+        <br />
+        <a class="btn btn-success" id="btnAddFeatures">افزودن</a>
+    </fieldset>
+</div>
+
+
+
+<br class="clear" />
+
+<table id="tbl_Features" class="col-md-12 table table-bordered table-hover  table-condensed table-responsive">
+    <thead>
+        <tr>
+            <th>
+                نام ویژگی
+            </th>
+            <th>
+                مقدار ویژگی
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+<div class="col-12">
+
+    <button id="btnAddProduct"  class="btn">ذخیره تغییرات</button>
+</div>
+                
+
+
+
+     
+<!-- Your Profile Views Chart END-->
+
+
+@section Scripts{
+
+    <link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/Sweetalert2/sweetalert2.min.js"></script>
+    <script>
+
+
+
+        $("#btnAddFeatures").on("click", function () {
+
+            var txtDisplayName = $("#txtDisplayName").val();
+            var txtValue = $("#txtValue").val();
+
+            if (txtDisplayName == "" || txtValue == "") {
+                swal.fire(
+                    'هشدار!',
+                    "نام و مقدار را باید وارد کنید",
+                    'warning'
+                );
+            }
+            else {
+                $('#tbl_Features tbody').append('<tr> <td>' + txtDisplayName + '</td>  <td>' + txtValue + '</td> <td> <a class="idFeatures btnDelete btn btn-danger"> حذف </a> </td> </tr>');
+                $("#txtDisplayName").val('');
+                $("#txtValue").val('');
+            }
+        });
+
+        $("#tbl_Features").on('click', '.idFeatures', function () {
+            $(this).closest('tr').remove();
+        });
+
+</script>
+   
+    <script>
+
+
+        $('#btnAddProduct').on('click', function () {
+
+            var data = new FormData();
+
+
+
+            //دریافت ویژگی های محصول از جدول
+            var dataFeaturesViewModel = $('#tbl_Features tr:gt(0)').map(function () {
+                return {
+                    DisplayName: $(this.cells[0]).text(),
+                    Value: $(this.cells[1]).text(),
+                };
+            }).get();
+
+            $.each(dataFeaturesViewModel, function (i, val) {
+                data.append('[' + i + '].DisplayName', val.DisplayName);
+                data.append('[' + i + '].Value', val.Value);
+
+            });
+
+
+
+
+
+            // ارسال اطلاعات به کنترلر
+            var ajaxRequest = $.ajax({
+                type: "POST",
+                url: "/admin/products/AddFeatures/@Model",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (msg) {
+                    console.log(msg);
+                    console.log(";lk3ehrl'4rhh4");
+
+                },
+                error: function (req, status, error) {
+                    console.log(msg);
+                }
+            }).then(function (isConfirm) {
+                window.location.href = "/Admin/Products/";
+            });
+
+        });
+    </script>
+}

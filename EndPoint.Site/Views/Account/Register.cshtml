@@ -1,0 +1,85 @@
+﻿@model MetiKala.Application.DTOs.User.RegisterViewModel
+@{
+    ViewData["Title"] = "ثبت نام";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #dangerText {
+        display: none;
+    }
+</style>
+<!-- login -->
+<div class="w3_login">
+    
+    <div class="w3_login_module">
+        <div class="module form-module">
+         
+
+
+            <h2>ایجاد یک حساب کاربری</h2>
+            @if (ViewBag.Seccess == true)
+            {
+        <div class="alert alert-success" role="alert">
+            <strong>Well done!</strong> ثبت نام موفقیت آمیز بود (به صفحه ورود هدایت می شوید)
+        </div>
+               
+            }
+            <form id="formRegister" asp-action="Register" method="post">
+                <input id="userName" asp-for="UserName" type="text" placeholder="نام کاربری">
+                <input id="email" asp-for="Email" type="email" placeholder="ایمیل">
+                <input id="password" asp-for="Password" type="password" placeholder="رمز عبور">
+                @if (ViewBag.existsUserName == true)
+                {
+                    <p style="margin-right:8px" class="text-danger">نام کاربری قبلا توسط شخص دیگری استفاده شده است</p>
+                }
+                @if (ViewBag.existsEmail == true)
+                {
+                    <p style="margin-right:8px" class="text-danger">ایمیل تکراری می باشد</p>
+                }
+            <div id="dangerText" class="alert alert-danger" role="alert">
+                لطفا تمامی موارد را وارد کنید
+            </div>
+                <input type="submit" value="ثبت نام">
+            </form>
+
+            <div class="cta"><a href="#">رمز عبور خود را فراموش کرده اید؟</a></div>
+        </div>
+    </div>
+    @*<script>
+            $('.toggle').click(function () {
+                // Switches the Icon
+                $(this).children('i').toggleClass('fa-pencil');
+                // Switches the forms
+                $('.form').animate({
+                    height: "toggle",
+                    'padding-top': 'toggle',
+                    'padding-bottom': 'toggle',
+                    opacity: "toggle"
+                }, "slow");
+            });
+        </script>*@
+
+    <script>
+
+
+        //چک کردن داده ها برای ثبت نام کاربران
+        const element = document.querySelector('#formRegister');
+        element.addEventListener('submit', event => {
+            let userName = document.getElementById('userName').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            if (userName == "" || email == "" || password == "") {
+                var dangerText = document.getElementById('dangerText');
+                dangerText.style.display = "block";
+                event.preventDefault();
+            }
+
+            // actual logic, e.g. validate the form
+            console.log('Form submission cancelled.');
+        });
+
+    </script>
+</div>
+<!-- //login -->
